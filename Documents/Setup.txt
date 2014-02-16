@@ -1,0 +1,7 @@
+Install Google Android SDK Tools
+Add the following to path : C:\Program Files (x86)\Android\android-sdk\tools
+
+Phonegap Install : http://phonegap.com/install/
+
+Google Chrome Testing : Ripple Addon
+
