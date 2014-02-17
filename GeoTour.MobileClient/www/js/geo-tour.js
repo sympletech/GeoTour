@@ -10,14 +10,17 @@
             self.map = null;
             self.tourGraphicsLayer = null;
             self.tourData = null;
+            self.currentLocation = [];
 
             self.init = function () {
                 navigator.geolocation.getCurrentPosition(function (position) {
 
+                    self.currentLocation = position.coords;
+
                     self.map = new esriMap("map-surface", {
                         basemap: 'streets',
                         zoom: 14,
-                        center: [position.coords.longitude, position.coords.latitude]
+                        center: [self.currentLocation.longitude, self.currentLocation.latitude]
                     });
 
                     self.tourGraphicsLayer = new esriGraphicsLayer({
@@ -34,13 +37,29 @@
                 });
 
                 navigator.geolocation.watchPosition(function (position) {
-                    var currentLocation = new esriPoint(position.coords.longitude, position.coords.latitude);
-                    self.map.centerAt(currentLocation);
+                    if (self.currentLocation.longitude != position.coords.longitude || self.currentLocation.latitude != position.coords.latitude) {
+                        self.currentLocation = position.coords;
+                        self.locationChanged();
+                    }
+
+
                 });
 
             };
 
-            //Tour Data
+            //**************************************
+            // Map Functions
+            //**************************************
+            self.locationChanged = function () {
+                var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
+                self.map.centerAt(currentLocationPt);
+                self.checkGeoFences(currentLocationPt);
+            };            
+
+
+            //**************************************
+            // Tour Data
+            //**************************************
             self.loadTourData = function () {
                 self.tourData = _.map(fakeData, function (dataEntry) {
                     var polyDef = JSON.parse(dataEntry.geomentryJson);
@@ -61,6 +80,14 @@
 
                     var graphic = new esriGraphic(tourEntry.geometry, symbol);
                     self.tourGraphicsLayer.add(graphic);
+                });
+            };
+
+            self.checkGeoFences = function (currentLocationPt) {
+                _.each(self.tourData, function (tourEntry) {
+                    if (tourEntry.geometry.contains(currentLocationPt)) {
+                        alert(tourEntry.name);
+                    }
                 });
             };
 
