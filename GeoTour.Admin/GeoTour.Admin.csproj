@@ -60,12 +60,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\geo-tour-admin.css" />
+    <Content Include="css\source\geo-tour-admin.css">
+      <DependentUpon>geo-tour-admin.scss</DependentUpon>
+    </Content>
+    <Content Include="css\source\geo-tour-admin.min.css">
+      <DependentUpon>geo-tour-admin.scss</DependentUpon>
+    </Content>
     <Content Include="index.html" />
     <Content Include="js\geo-tour-admin.js" />
     <Content Include="js\vendor\jquery-1.11.0.min.js" />
+    <Content Include="js\vendor\underscore-min.js" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="css\source\" />
+    <Content Include="css\source\geo-tour-admin.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

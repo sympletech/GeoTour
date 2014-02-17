@@ -40,6 +40,8 @@
 
                 self.map.showZoomSlider();
 
+                console.log(JSON.stringify(evt.geometry));
+
             });
         };
 
