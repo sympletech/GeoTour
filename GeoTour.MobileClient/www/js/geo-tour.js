@@ -99,16 +99,33 @@
             //Play content for current tour entry
             self.playTourGeoFenceContent = function(tourEntry) {
                 switch (tourEntry.onGeoTrigger.type) {
-                case 'audio':
-                    var audioPlayer = $("#audio-player");
-                    audioPlayer.attr("src", tourEntry.onGeoTrigger.src);
-                    audioPlayer[0].play();
+                    case 'audio':
+                        var audioPlayer = $("#audio-player");
+                        audioPlayer.attr("src", tourEntry.onGeoTrigger.src);
+                        audioPlayer[0].play();
+                        break;
+                    case 'youtube':
+                        var youtubePlayer = $("#youtube-player");
+                        youtubePlayer.attr('src', '//www.youtube.com/embed/' + tourEntry.onGeoTrigger.id + '?autoplay=1');
+                        break;
+                    case 'slideshow':
+                        var container = $('#slideshow-image-container');
+
+                        var imgsHtml = "";
+                        _.each(tourEntry.onGeoTrigger.images, function (img) {
+                            imgsHtml += "<img src='" + img + "'></img>";
+                        });
+
+                        container.html(imgsHtml);
+                        
+                        var slideshowAudioPlayer = $("#slideshow-audio-player");
+                        slideshowAudioPlayer.attr("src", tourEntry.onGeoTrigger.audio);
+                        slideshowAudioPlayer[0].play();
+
                     break;
-                case 'youtube':
-                    var youtubePlayer = $("#youtube-player");
-                    youtubePlayer.attr('src', '//www.youtube.com/embed/' + tourEntry.onGeoTrigger.id + '?autoplay=1');
-                    break;
-                default:
+                    
+                    default:
+                        
                     break;
                 }
             };
