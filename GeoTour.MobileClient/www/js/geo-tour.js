@@ -32,6 +32,7 @@
                     self.map.on('load', function () {
                         self.loadTourData();
                         self.drawHotSpotsForTour();
+                        self.checkGeoFences();
                     });
 
                 });
@@ -53,7 +54,7 @@
             self.locationChanged = function () {
                 var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
                 self.map.centerAt(currentLocationPt);
-                self.checkGeoFences(currentLocationPt);
+                self.checkGeoFences();
             };            
 
 
@@ -83,12 +84,29 @@
                 });
             };
 
-            self.checkGeoFences = function (currentLocationPt) {
+            //Check if current location is inside a geo fence of the tour
+            self.checkGeoFences = function () {
+                var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
                 _.each(self.tourData, function (tourEntry) {
                     if (tourEntry.geometry.contains(currentLocationPt)) {
-                        alert(tourEntry.name);
+                        if (tourEntry.onGeoTrigger.played == null) {
+                            self.playTourGeoFenceContent(tourEntry);
+                        }
                     }
                 });
+            };
+
+            //Play content for current tour entry
+            self.playTourGeoFenceContent = function(tourEntry) {
+                switch (tourEntry.onGeoTrigger.type) {
+                case 'audio':
+                    var audioPlayer = $("#audio-player");
+                    audioPlayer.attr("src", tourEntry.onGeoTrigger.src);
+                    audioPlayer[0].play();
+                    break;
+                default:
+                    break;
+                }
             };
 
 
