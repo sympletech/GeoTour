@@ -5,17 +5,29 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         watch: {
-            sass: {
+            sassMobile: {
                 files: ['../GeoTour.MobileClient/www/css/source/**/*.scss'],
                 tasks: ['compass']
-            }
+            },
+            sassAdmin: {
+                files: ['../GeoTour.Admin/css/source/**/*.scss'],
+                tasks: ['compass']
+            },
         },
 
         compass: {
-            sass: {
+            sassMobile: {
                 options: {
                     sassDir: '../GeoTour.MobileClient/www/css/source/',
                     cssDir: '../GeoTour.MobileClient/www/css/',
+                    //environment: 'production',
+                    //outputStyle: 'compressed'
+                }
+            },
+            sassAdmin: {
+                options: {
+                    sassDir: '../GeoTour.Admin/css/source/',
+                    cssDir: '../GeoTour.Admin/css/',
                     //environment: 'production',
                     //outputStyle: 'compressed'
                 }
