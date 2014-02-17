@@ -26,6 +26,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "www(2)", "http://localhost:
 		SlnRelativePath = "GeoTour.MobileClient\www\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoTour.Admin", "GeoTour.Admin\GeoTour.Admin.csproj", "{CC777957-0326-4C81-88BC-E4BCCDA2811E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{91EECEEC-35CE-4552-8A89-2874CD907D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91EECEEC-35CE-4552-8A89-2874CD907D9E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{91EECEEC-35CE-4552-8A89-2874CD907D9E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{CC777957-0326-4C81-88BC-E4BCCDA2811E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC777957-0326-4C81-88BC-E4BCCDA2811E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC777957-0326-4C81-88BC-E4BCCDA2811E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC777957-0326-4C81-88BC-E4BCCDA2811E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
