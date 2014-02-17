@@ -104,6 +104,10 @@
                     audioPlayer.attr("src", tourEntry.onGeoTrigger.src);
                     audioPlayer[0].play();
                     break;
+                case 'youtube':
+                    var youtubePlayer = $("#youtube-player");
+                    youtubePlayer.attr('src', '//www.youtube.com/embed/' + tourEntry.onGeoTrigger.id + '?autoplay=1');
+                    break;
                 default:
                     break;
                 }
