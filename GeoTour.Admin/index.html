@@ -4,20 +4,23 @@
     <title>WebOps Geo Tour Administrator</title>
     
     <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
-    <a href="css/source/geo-tour-admin.scss">css/source/geo-tour-admin.scss</a>
-</head>
-<body>
-    <div id="map-surface"></div>
-    
-    <!--vendor scripts-->
-    <script src="js/vendor/jquery-1.11.0.min.js"></script>
-    
-    <!--ESRI Mapping API-->
-    <script>var dojoConfig = { parseOnLoad: true };</script>
-    <script src="http://js.arcgis.com/3.7/"></script>
-    
-    <!--Application Scripts-->
-    <script src="js/geo-tour-admin.js"></script>
+    <link href="css/geo-tour-admin.css" rel="stylesheet" />
 
-</body>
+</head>
+    <body>
+        <button data-dojo-type="dijit/form/Button">Multi Point</button>
+
+        <div id="map-surface"></div>
+    
+        <!--vendor scripts-->
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
+    
+        <!--ESRI Mapping API-->
+        <script>var dojoConfig = { parseOnLoad: true };</script>
+        <script src="http://js.arcgis.com/3.7/"></script>
+    
+        <!--Application Scripts-->
+        <script src="js/geo-tour-admin.js"></script>
+
+    </body>
 </html>
