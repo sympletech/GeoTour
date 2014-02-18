@@ -17,6 +17,7 @@
 
                     self.currentLocation = position.coords;
 
+                    //Initialize Map
                     self.map = new esriMap("map-surface", {
                         basemap: 'streets',
                         zoom: 14,
@@ -32,20 +33,18 @@
                     self.map.on('load', function () {
                         self.loadTourData();
                         self.drawHotSpotsForTour();
-                        self.checkGeoFences();
+                        //self.checkGeoFences();
                     });
 
                 });
 
+                //Handle Location Change
                 navigator.geolocation.watchPosition(function (position) {
                     if (self.currentLocation.longitude != position.coords.longitude || self.currentLocation.latitude != position.coords.latitude) {
                         self.currentLocation = position.coords;
                         self.locationChanged();
                     }
-
-
                 });
-
             };
 
             //**************************************
@@ -72,6 +71,7 @@
                 });
             };
 
+            //Paint Tour's Hot Spots On Map
             self.drawHotSpotsForTour = function () {
                 _.each(self.tourData, function (tourEntry) {
                     var symbol = new esriSimpleFillSymbol(esriSimpleFillSymbol.STYLE_SOLID,
@@ -97,37 +97,28 @@
             };
 
             //Play content for current tour entry
-            self.playTourGeoFenceContent = function(tourEntry) {
+            self.playTourGeoFenceContent = function (tourEntry) {
+                $('.popup-content').hide();
+                
                 switch (tourEntry.onGeoTrigger.type) {
                     case 'audio':
+                        $("#audio-popup").show();
                         var audioPlayer = $("#audio-player");
                         audioPlayer.attr("src", tourEntry.onGeoTrigger.src);
                         audioPlayer[0].play();
                         break;
                     case 'youtube':
+                        $("#youtube-popup").show();
                         var youtubePlayer = $("#youtube-player");
                         youtubePlayer.attr('src', '//www.youtube.com/embed/' + tourEntry.onGeoTrigger.id + '?autoplay=1');
                         break;
-                    case 'slideshow':
-                        var container = $('#slideshow-image-container');
-
-                        var imgsHtml = "";
-                        _.each(tourEntry.onGeoTrigger.images, function (img) {
-                            imgsHtml += "<img src='" + img + "'></img>";
-                        });
-
-                        container.html(imgsHtml);
-                        
-                        var slideshowAudioPlayer = $("#slideshow-audio-player");
-                        slideshowAudioPlayer.attr("src", tourEntry.onGeoTrigger.audio);
-                        slideshowAudioPlayer[0].play();
-
-                    break;
                     
                     default:
                         
                     break;
                 }
+                
+                $("#popup-wrapper").fadeIn();
             };
 
 

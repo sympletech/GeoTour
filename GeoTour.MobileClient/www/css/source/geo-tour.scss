@@ -1,3 +1,30 @@
-body{
-	color : black;
+.abs-fill{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+#popup-wrapper{
+	z-index:10;
+	display:none;
+	@extend .abs-fill;
+
+	.overlay{
+		background:#000;
+		opacity:0.75;	
+		z-index:11;
+		@extend .abs-fill;
+	}
+
+	.popup-content{
+		border: solid 1px #000;
+		//background:#fff;
+		z-index:12;
+		margin-top:50%;
+		position:absolute;
+		display:none;
+		
+	}
 }

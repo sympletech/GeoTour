@@ -1,4 +1,28 @@
 /* line 1, source/geo-tour.scss */
-body {
-  color: black;
+.abs-fill, #popup-wrapper, #popup-wrapper .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* line 9, source/geo-tour.scss */
+#popup-wrapper {
+  z-index: 10;
+  display: none;
+}
+/* line 14, source/geo-tour.scss */
+#popup-wrapper .overlay {
+  background: #000;
+  opacity: 0.75;
+  z-index: 11;
+}
+/* line 21, source/geo-tour.scss */
+#popup-wrapper .popup-content {
+  border: solid 1px #000;
+  z-index: 12;
+  margin-top: 50%;
+  position: absolute;
+  display: none;
 }

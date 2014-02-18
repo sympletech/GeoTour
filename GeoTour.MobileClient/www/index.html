@@ -15,18 +15,18 @@
 <body>
     <div id="map-surface"></div>
 
-    <div id="audio-popup">
-        <audio id="audio-player" controls></audio>
+    <div id="popup-wrapper">
+        <div class="overlay"></div>
+        <div id="audio-popup" class="popup-content">
+            <audio id="audio-player" controls></audio>
+        </div>
+
+        <div id="youtube-popup" class="popup-content">
+            <iframe id="youtube-player" width="640" height="390" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 
-    <div id="youtube-popup">
-        <iframe id="youtube-player" width="640" height="390" frameborder="0" allowfullscreen></iframe>
-    </div>
 
-    <div id="slideshow-popup">
-        <div id="slideshow-image-container"></div>
-        <audio id="slideshow-audio-player" controls></audio>
-    </div>
 
     <!--vendor scripts-->
     <script src="phonegap.js"></script>
