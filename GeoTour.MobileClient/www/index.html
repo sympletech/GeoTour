@@ -21,9 +21,9 @@
         <button id="menu-button">Menu</button>
         
         <div id="menu">
-            <button id="find-tour">Find Tour</button>
-            <button id="view-tour-stops">Tour Stops</button>
-            <button id="view-tour-onmap">View Tour on Map</button>
+            <button id="find-tour" data-bind="click:menu.findTourClick">Find Tour</button>
+            <button id="view-tour-stops" data-bind="click:menu.TourStopsClick, visible:showTourStopsButton">Tour Stops</button>
+            <button id="view-tour-onmap" data-bind="click:menu.ViewTourClick, visible:showViewTourOnMapButton">View Tour on Map</button>
         </div>
 
     </div>
@@ -37,14 +37,11 @@
                 <div class="popup-header">
                     <button class="close-popup">X</button>
                     Find a Tour
-                    <input type="text" />
+                    <input type="text" data-bind="value: findTourPopup.search" />
                 </div>
                 <div class="popup-body">
-                    <ul class="list">
-                        <li class="hover">Big Bear (1.5 Miles)</li>
-                        <li class="hover">Big Bear (1.5 Miles)</li>
-                        <li class="hover">Big Bear (1.5 Miles)</li>
-                        <li class="hover">Big Bear (1.5 Miles)</li>
+                    <ul class="list" data-bind="foreach : findTourPopup.results">
+                        <li class="hover" data-bind="html:$data"></li>
                     </ul>
                 </div>                
             </div>
@@ -55,53 +52,38 @@
             <div class="popup-content">
                 <div class="popup-header">
                     <button class="close-popup">X</button>
-                    <div>Big Bear California</div>
+                    <div data-bind="html:currentTour().name"></div>
                     Tour Stops
                 </div>
-                <div class="popup-body">
-                    <ul class="list">
+                <div class="popup-body" >
+                    <ul class="list" data-bind="foreach:currentTour().tourStops">
                         <li class="hover tour-entry">
                             <table>
                                 <tr>
                                     <td>
-                                        <img class="thumbnail" src="http://www.bbso.njit.edu/Images/tour2.jpg" />
+                                        <img class="thumbnail" data-bind="attr : {src : thumbnail}" />
                                     </td>
                                     <td class="tour-entry-detail">
-                                        <b>Solar Observatority</b><br/>
+                                        <b data-bind="html : name"></b><br />
                                         <img src="img/navigation-pointer.png" />
                                         <b>1.5 Miles</b>
                                     </td>
                                 </tr>
                             </table>
                         </li>
-                        <li class="hover tour-entry">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <img class="thumbnail" src="http://www.bbso.njit.edu/Images/tour2.jpg" />
-                                    </td>
-                                    <td class="tour-entry-detail">
-                                        <b>Solar Observatority</b><br />
-                                        <img src="img/navigation-pointer.png" />
-                                        <b>1.5 Miles</b>
-                                    </td>
-                                </tr>
-                            </table>
-                        </li>
-
                     </ul>
                 </div>
             </div>
         </div>
         
         
-        <!--Find Tour Popup-->
+        <!--Stop Details Popup-->
         <div id="tour-stop-popup" class="popup-content-wrapper">
             <div class="popup-content">
                 <div class="popup-header">
                     <button class="close-popup">X</button>
-                    <div>Big Bear California</div>
-                    <div>Solar Observatority Details</div>
+                    <div data-bind="html:currentTour().name"></div>
+                    <div data-bind="html:stopDetails().name"></div>
                 </div>
                 <div class="popup-body">
                     <div class="player-wrapper">
@@ -109,11 +91,12 @@
                         <iframe id="youtube-player" class="media-player" width="640" height="390" frameborder="0" allowfullscreen></iframe>
                     </div>
 
-                    <ul class="content-thumbs">
-                        <li class="hover"><img class="thumbnail" src="http://www.bbso.njit.edu/Images/tour2.jpg" /></li>
-                        <li class="hover"><img class="thumbnail" src="http://www.bbso.njit.edu/Images/tour2.jpg" /></li>
-                        <li class="hover"><img class="thumbnail" src="http://www.bbso.njit.edu/Images/tour2.jpg" /></li>
-                        <li class="hover"><img class="thumbnail" src="http://www.bbso.njit.edu/Images/tour2.jpg" /></li>
+                    <ul class="content-thumbs" data-bind="foreach:stopDetails().photos">
+                        <li class="hover"><img class="thumbnail" data-bind="attr : { src : $data }" /></li>
+                    </ul>
+                    
+                    <ul class="content-thumbs" data-bind="foreach:stopDetails().videos">
+                        <li class="hover"><img class="thumbnail" data-bind="attr : { src : $data }" /></li>
                     </ul>
                 </div>
             </div>
@@ -136,6 +119,11 @@
     <!--Application Scripts-->
     <script src="js/fake-data.js"></script>
     <script src="js/geo-tour.js"></script>
+    <script src="js/client-view-model.js"></script>
+    
+    <script type="text/javascript">
+        ko.applyBindings(new clientViewModel());
+    </script>
 
 </body>
 

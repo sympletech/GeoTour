@@ -149,17 +149,6 @@
                     self.hidePopup();
                 });
 
-                $("#find-tour").on("click", function () {
-                    self.showPopup('find-tour-popup');
-                });
-
-                $("#view-tour-stops").on("click", function () {
-                    self.showPopup('view-tour-popup');
-                });
-
-                $("#view-tour-onmap").on("click", function () {
-                    self.showPopup('tour-stop-popup');
-                });
             };
 
             //Call Init
