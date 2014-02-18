@@ -1,5 +1,5 @@
 /* line 1, source/geo-tour.scss */
-.abs-fill, #popup-wrapper, #popup-wrapper .overlay {
+.abs-fill, .map-surface-wrapper, #popup-wrapper, #popup-wrapper .overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -8,17 +8,60 @@
 }
 
 /* line 9, source/geo-tour.scss */
+.map-surface-wrapper {
+  z-index: 1;
+}
+/* line 14, source/geo-tour.scss */
+.map-surface-wrapper #map-surface {
+  width: 100%;
+  height: 100%;
+}
+/* line 19, source/geo-tour.scss */
+.map-surface-wrapper #menu-button {
+  background: #364455;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  position: absolute;
+  z-index: 3;
+  bottom: 40px;
+  right: 5px;
+  font-size: 1.5em;
+  padding: 10px;
+}
+/* line 32, source/geo-tour.scss */
+.map-surface-wrapper #menu {
+  position: absolute;
+  z-index: 2;
+  background: #fff;
+  width: 100%;
+  padding-top: 15px;
+  height: 85px;
+  bottom: 0;
+  padding-left: 10px;
+}
+/* line 42, source/geo-tour.scss */
+.map-surface-wrapper #menu button {
+  background: #364455;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px;
+  font-size: 1em;
+}
+
+/* line 59, source/geo-tour.scss */
 #popup-wrapper {
   z-index: 10;
   display: none;
 }
-/* line 14, source/geo-tour.scss */
+/* line 64, source/geo-tour.scss */
 #popup-wrapper .overlay {
   background: #000;
   opacity: 0.75;
   z-index: 11;
 }
-/* line 21, source/geo-tour.scss */
+/* line 71, source/geo-tour.scss */
 #popup-wrapper .popup-content {
   border: solid 1px #000;
   z-index: 12;

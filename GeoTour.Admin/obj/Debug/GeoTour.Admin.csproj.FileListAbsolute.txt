@@ -1,0 +1,5 @@
+C:\Projects\GeoTour\GeoTour.Admin\bin\GeoTour.Admin.dll
+C:\Projects\GeoTour\GeoTour.Admin\bin\GeoTour.Admin.pdb
+C:\Projects\GeoTour\GeoTour.Admin\obj\Debug\GeoTour.Admin.csprojResolveAssemblyReference.cache
+C:\Projects\GeoTour\GeoTour.Admin\obj\Debug\GeoTour.Admin.dll
+C:\Projects\GeoTour\GeoTour.Admin\obj\Debug\GeoTour.Admin.pdb

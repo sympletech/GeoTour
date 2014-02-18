@@ -6,6 +6,56 @@
 	right:0;
 }
 
+.map-surface-wrapper{
+	@extend .abs-fill;
+
+	z-index:1;
+
+	#map-surface{
+		width: 100%;
+		height:100%;
+	}
+
+	#menu-button{
+		background:#364455;
+		border:none;
+		border-radius:5px;
+		color:#fff;
+		position:absolute;
+		z-index:3;
+		bottom:40px;
+		right:5px;
+		font-size:1.5em;
+		padding:10px;
+	}
+
+	#menu{
+		position: absolute;
+		z-index: 2;
+		background: #fff;
+		width: 100%;
+		padding-top: 15px;
+		height: 85px;
+		bottom: 0;
+		padding-left: 10px;	
+
+		button{
+			background:#364455;
+			border:none;
+			border-radius:5px;
+			color:#fff;	
+			padding:10px;
+			font-size:1em;
+		}
+	}
+}
+
+
+
+
+
+
+
 #popup-wrapper{
 	z-index:10;
 	display:none;
