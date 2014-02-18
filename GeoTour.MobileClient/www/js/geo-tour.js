@@ -124,6 +124,10 @@
 
             };
 
+            self.hidePopup = function () {
+                $("#popup-wrapper").fadeOut();
+            };
+
             //**************************************
             // Menu
             //**************************************
@@ -135,6 +139,10 @@
 
                     TweenLite.to($menu, 0.5, { height: targetHeight });
 
+                });
+
+                $(".close-popup").on("click", function () {
+                    self.hidePopup();
                 });
 
                 $("#find-tour").on("click", function () {

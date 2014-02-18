@@ -166,7 +166,8 @@ input[type=text], input[type=password], textarea {
     bottom: 40px;
     right: 5px;
     font-size: 1.5em;
-    padding: 10px; }
+    padding: 10px;
+    cursor: pointer; }
   .map-surface-wrapper #menu {
     position: absolute;
     z-index: 2;
@@ -182,7 +183,8 @@ input[type=text], input[type=password], textarea {
       color: #fff;
       padding: 10px;
       font-size: 1em;
-      margin-top: 15px; }
+      margin-top: 15px;
+      cursor: pointer; }
 
 #popup-wrapper {
   z-index: 10;

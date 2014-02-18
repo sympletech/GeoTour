@@ -218,8 +218,9 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   right: 5px;
   font-size: 1.5em;
   padding: 10px;
+  cursor: pointer;
 }
-/* line 35, source/geo-tour.scss */
+/* line 36, source/geo-tour.scss */
 .map-surface-wrapper #menu {
   position: absolute;
   z-index: 2;
@@ -229,7 +230,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   bottom: 0;
   padding-left: 10px;
 }
-/* line 44, source/geo-tour.scss */
+/* line 45, source/geo-tour.scss */
 .map-surface-wrapper #menu button {
   background: #364455;
   border: none;
@@ -238,25 +239,26 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   padding: 10px;
   font-size: 1em;
   margin-top: 15px;
+  cursor: pointer;
 }
 
-/* line 62, source/geo-tour.scss */
+/* line 64, source/geo-tour.scss */
 #popup-wrapper {
   z-index: 10;
   display: none;
 }
-/* line 67, source/geo-tour.scss */
+/* line 69, source/geo-tour.scss */
 #popup-wrapper .overlay {
   background: #000;
   opacity: 0.75;
   width: 100%;
   height: 100%;
 }
-/* line 74, source/geo-tour.scss */
+/* line 76, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper {
   z-index: 12;
 }
-/* line 79, source/geo-tour.scss */
+/* line 81, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content {
   width: 75%;
   height: 70%;
@@ -266,7 +268,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   margin-top: 10%;
   border-radius: 5px;
 }
-/* line 88, source/geo-tour.scss */
+/* line 90, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content .popup-header {
   background: #2e7438;
   color: #fff;
@@ -275,7 +277,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   padding-bottom: 15px;
   border-radius: 5px 5px 0 0;
 }
-/* line 96, source/geo-tour.scss */
+/* line 98, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content .popup-header .close-popup {
   float: right;
   margin: -15px;
