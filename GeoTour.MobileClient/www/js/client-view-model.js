@@ -44,7 +44,6 @@
         name: 'Solar Observatority',
         photos: ['http://www.bbso.njit.edu/Images/tour2.jpg', 'http://www.bbso.njit.edu/Images/tour2.jpg'],
         videos: ['http://www.bbso.njit.edu/Images/tour2.jpg', 'http://www.bbso.njit.edu/Images/tour2.jpg']
-
     });
 
 
