@@ -121,10 +121,24 @@
                 $("#popup-wrapper").fadeIn();
             };
 
+            //**************************************
+            // Menu
+            //**************************************
+            self.registerMenuButtons = function () {
+                $("#menu-button").on("click", function () {
+                    var $menu = $("#menu"),
+                        curHeight = $menu.height(),
+                        targetHeight = curHeight == 0 ? 100 : 0;
+
+                    TweenLite.to($menu, 0.5, { height: targetHeight });
+
+                });
+            };
 
             //Call Init
             document.addEventListener('deviceready', function () {
                 self.init();
+                self.registerMenuButtons();
             }, false);
         });
 

@@ -26,8 +26,7 @@
     z-index: 2;
     background: #fff;
     width: 100%;
-    padding-top: 15px;
-    height: 85px;
+    height: 100px;
     bottom: 0;
     padding-left: 10px; }
     .map-surface-wrapper #menu button {
@@ -36,7 +35,8 @@
       border-radius: 5px;
       color: #fff;
       padding: 10px;
-      font-size: 1em; }
+      font-size: 1em;
+      margin-top: 15px; }
 
 #popup-wrapper {
   z-index: 10;

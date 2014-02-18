@@ -35,12 +35,11 @@
   z-index: 2;
   background: #fff;
   width: 100%;
-  padding-top: 15px;
-  height: 85px;
+  height: 100px;
   bottom: 0;
   padding-left: 10px;
 }
-/* line 42, source/geo-tour.scss */
+/* line 41, source/geo-tour.scss */
 .map-surface-wrapper #menu button {
   background: #364455;
   border: none;
@@ -48,6 +47,7 @@
   color: #fff;
   padding: 10px;
   font-size: 1em;
+  margin-top: 15px;
 }
 
 /* line 59, source/geo-tour.scss */
