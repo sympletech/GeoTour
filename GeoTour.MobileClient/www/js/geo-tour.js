@@ -61,7 +61,7 @@
             // Tour Data
             //**************************************
             self.loadTourData = function () {
-                self.tourData = _.map(fakeData, function (dataEntry) {
+                self.tourData = _.map(fakeTour.steps, function (dataEntry) {
                     var polyDef = JSON.parse(dataEntry.geomentryJson);
 
                     var ploygon = new esriPolygon(polyDef.spatialReference);
@@ -98,23 +98,27 @@
 
             //Play content for current tour entry
             self.playTourGeoFenceContent = function (tourEntry) {
+                $(".media-player").hide();
+
                 switch (tourEntry.onGeoTrigger.type) {
                     case 'audio':
                         var audioPlayer = $("#audio-player");
                         audioPlayer.attr("src", tourEntry.onGeoTrigger.src);
                         audioPlayer[0].play();
-                        self.showPopup("audio-popup");
+                        audioPlayer.show();
                         break;
                     case 'youtube':
                         var youtubePlayer = $("#youtube-player");
                         youtubePlayer.attr('src', '//www.youtube.com/embed/' + tourEntry.onGeoTrigger.id + '?autoplay=1');
-                        self.showPopup("youtube-popup");
+                        youtubePlayer.show();
                         break;
                     
                     default:
                         
                     break;
                 }
+                
+                self.showPopup('tour-stop-popup');
             };
 
             self.showPopup = function (popupName) {
@@ -147,6 +151,14 @@
 
                 $("#find-tour").on("click", function () {
                     self.showPopup('find-tour-popup');
+                });
+
+                $("#view-tour-stops").on("click", function () {
+                    self.showPopup('view-tour-popup');
+                });
+
+                $("#view-tour-onmap").on("click", function () {
+                    self.showPopup('tour-stop-popup');
                 });
             };
 

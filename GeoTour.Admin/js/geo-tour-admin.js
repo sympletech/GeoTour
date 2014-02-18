@@ -15,8 +15,9 @@
 
                 self.map = new esriMap("map-surface", {
                     basemap: 'streets',
-                    zoom: 10,
-                    center: [location.coords.longitude, location.coords.latitude],
+                    zoom: 14,
+                    //center: [location.coords.longitude, location.coords.latitude],
+                    center: [-116.910672, 34.259984]
                 });
 
                 self.map.on('load', function() {

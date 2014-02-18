@@ -216,4 +216,24 @@ input[type=text], input[type=password], textarea {
           margin: -15px;
           cursor: pointer;
           font-size: 0.75em; }
+  #popup-wrapper .media-player {
+    display: none; }
+
+#view-tour-popup .tour-entry .thumbnail {
+  width: 100px;
+  height: 100px;
+  float: left; }
+#view-tour-popup .tour-entry .tour-entry-detail img {
+  padding: 5px; }
+
+#tour-stop-popup .content-thumbs {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  #tour-stop-popup .content-thumbs li {
+    float: left; }
+    #tour-stop-popup .content-thumbs li img {
+      width: 125px;
+      height: 125px;
+      margin: 10px; }
 

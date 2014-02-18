@@ -108,4 +108,44 @@
 			}
 		}
 	}
+
+	.media-player{
+		display:none;
+	}
+}
+
+
+//View Tour Popup
+#view-tour-popup{
+	.tour-entry{
+		.thumbnail{
+			width: 100px;
+			height:100px;
+			float:left;
+		}
+
+		.tour-entry-detail{
+			img{
+				padding:5px;
+			}
+		}
+	}
+}
+
+#tour-stop-popup{
+	.content-thumbs{
+		list-style:none;
+		margin:0;
+		padding:0;
+
+		li{
+			float:left;
+
+			img{
+				width:125px;
+				height:125px;
+				margin:10px;
+			}
+		}
+	}
 }

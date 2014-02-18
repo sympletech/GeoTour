@@ -284,3 +284,35 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   cursor: pointer;
   font-size: 0.75em;
 }
+/* line 112, source/geo-tour.scss */
+#popup-wrapper .media-player {
+  display: none;
+}
+
+/* line 121, source/geo-tour.scss */
+#view-tour-popup .tour-entry .thumbnail {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+/* line 128, source/geo-tour.scss */
+#view-tour-popup .tour-entry .tour-entry-detail img {
+  padding: 5px;
+}
+
+/* line 136, source/geo-tour.scss */
+#tour-stop-popup .content-thumbs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 141, source/geo-tour.scss */
+#tour-stop-popup .content-thumbs li {
+  float: left;
+}
+/* line 144, source/geo-tour.scss */
+#tour-stop-popup .content-thumbs li img {
+  width: 125px;
+  height: 125px;
+  margin: 10px;
+}
