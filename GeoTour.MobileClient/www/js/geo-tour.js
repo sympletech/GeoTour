@@ -98,27 +98,30 @@
 
             //Play content for current tour entry
             self.playTourGeoFenceContent = function (tourEntry) {
-                $('.popup-content').hide();
-                
                 switch (tourEntry.onGeoTrigger.type) {
                     case 'audio':
-                        $("#audio-popup").show();
                         var audioPlayer = $("#audio-player");
                         audioPlayer.attr("src", tourEntry.onGeoTrigger.src);
                         audioPlayer[0].play();
+                        self.showPopup("audio-popup");
                         break;
                     case 'youtube':
-                        $("#youtube-popup").show();
                         var youtubePlayer = $("#youtube-player");
                         youtubePlayer.attr('src', '//www.youtube.com/embed/' + tourEntry.onGeoTrigger.id + '?autoplay=1');
+                        self.showPopup("youtube-popup");
                         break;
                     
                     default:
                         
                     break;
                 }
-                
+            };
+
+            self.showPopup = function (popupName) {
+                $('.popup-content-wrapper').hide();
+                $("#" + popupName).show();
                 $("#popup-wrapper").fadeIn();
+
             };
 
             //**************************************
@@ -132,6 +135,10 @@
 
                     TweenLite.to($menu, 0.5, { height: targetHeight });
 
+                });
+
+                $("#find-tour").on("click", function () {
+                    self.showPopup('find-tour-popup');
                 });
             };
 

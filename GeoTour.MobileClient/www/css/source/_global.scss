@@ -1,0 +1,157 @@
+@font-face {
+    font-family: Avenir-Lt;
+    src: url('../fonts/AvenirLTStd-Light.otf');
+}
+@font-face {
+    font-family: Avenir-Med;
+    src: url('../fonts/AvenirLTStd-Medium.otf');
+}
+
+$Avenir-Lt : Avenir-Lt, Arial, Helvetica, sans-serif;
+$Avenir-Med : Avenir-Med, Arial, Helvetica, sans-serif;
+
+$dark-blue : #005e95;
+$med-blue : #007ac2;
+$light-blue : #cfe6f4;
+
+$light-grey : #fbfbfb;
+$med-grey : #efefef;
+$gray-border : #e8e8e8;
+
+$med-orange : #ef900d;
+$dark-orange: #f0702f;
+
+
+/* ----------------------------------------------------
+  Top Level Styles
+ --------------------------------------------------- */ 
+body, html{
+    font-family: $Avenir-Lt;
+	height: 100%;  
+	background: url('../img/background.jpg');
+	background-size: cover;
+}
+
+h1{
+	font-size:2.5em;
+	font-weight:bold;
+	margin: 10px 0;
+}
+
+h4{
+	font-size:1.25em;
+	margin: 5px 0;
+}
+
+a{
+	color: $med-blue;
+	text-decoration:none;
+
+	&:hover{
+		color:$dark-blue;
+	}
+}
+
+/* ----------------------------------------------------
+  Utility Styles
+ --------------------------------------------------- */ 
+.pull-left{
+	float:left;
+}
+.pull-right{
+	float:right;
+}
+.hover{
+	cursor:pointer;
+}
+.clear-both{
+	clear:both;
+}
+.error{
+	background-color: #f2dede;
+	color: #a94442;
+	padding: 15px;
+	border: 1px solid #ebccd1;
+	margin : 5px;
+	@include border-radius(5px);
+}
+
+/* ----------------------------------------------------
+  Form Styles
+ --------------------------------------------------- */ 
+ .form{
+	background : $light-grey;
+	border: solid 2px $med-grey;
+	padding : 30px;
+	@include border-radius(10px);
+
+
+	label{
+		font-weight:bold;
+		display:block;
+		padding:5px 0;
+	}
+
+
+ }
+
+input[type=text], input[type=password], textarea{
+	padding:5px;
+	margin :5px 0;
+	font-size:1.25em;
+	border: solid 2px $med-grey;
+	width:95%;
+	@include border-radius(5px);
+	@include transition(border-color 0.15s ease-in-out 0s);
+	@include transition(box-shadow 0.15s ease-in-out 0s);
+
+	&:focus{
+		border : solid 2px $med-blue;
+		@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.075) inset);
+		@include box-shadow(0 0 8px rgba(102, 175, 233, 0.6));
+	}
+}
+
+ /* ----------------------------------------------------
+  Button Styles
+ --------------------------------------------------- */ 
+ .btn{
+	font-size:1.1em;
+	padding:10px;
+	background : $light-grey;
+	border : solid 2px $med-grey;
+	cursor:pointer;
+	margin: 5px 0;
+	@include border-radius(5px);
+
+	&:hover{
+		background: $med-grey;
+	}
+
+	&.btn-primary{
+		background: $med-orange;
+
+		&:hover{
+			background:$dark-orange;
+		}
+	}
+ }
+
+ /* ----------------------------------------------------
+  List
+ --------------------------------------------------- */ 
+ .list{
+	list-style:none;
+	margin:0;
+	padding:0;
+
+	li{
+		padding:10px;
+		font-size:1.15em;
+
+		&:nth-child(odd){
+			background : #3cab4c;
+			color:#fff;
+		}
+	}
+ }

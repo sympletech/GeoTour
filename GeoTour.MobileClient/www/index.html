@@ -30,6 +30,27 @@
 
     <div id="popup-wrapper">
         <div class="overlay"></div>
+        
+        <div id="find-tour-popup" class="popup-content-wrapper">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <button class="close-popup">X</button>
+                    Find a Tour
+                    <input type="text" />
+                </div>
+                <div class="popup-body">
+                    <ul class="list">
+                        <li class="hover">Big Bear (1.5 Miles)</li>
+                        <li class="hover">Big Bear (1.5 Miles)</li>
+                        <li class="hover">Big Bear (1.5 Miles)</li>
+                        <li class="hover">Big Bear (1.5 Miles)</li>
+                    </ul>
+                </div>                
+            </div>
+        </div>
+        
+        
+
         <div id="audio-popup" class="popup-content">
             <audio id="audio-player" controls></audio>
         </div>
@@ -45,6 +66,7 @@
     <script src="phonegap.js"></script>
     <script src="js/vendor/jquery-1.11.0.min.js"></script>
     <script src="js/vendor/underscore-min.js"></script>
+    <script src="js/vendor/knockout-3.0.0.js"></script>
     <script src="js/vendor/greensock/TweenMax.min.js"></script>
 
     <!--ESRI Mapping API-->
