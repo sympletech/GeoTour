@@ -1,14 +1,17 @@
 ﻿var geoTour = new (function () {
     var self = this;
 
+    var debugMode = true;
+
     //Esri JS Includes
     require(["esri/map", "esri/layers/GraphicsLayer", "esri/geometry/Point", "esri/geometry/Polygon", "esri/graphic",
-            "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol"],
+            "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/PictureMarkerSymbol"],
         function (esriMap, esriGraphicsLayer, esriPoint, esriPolygon, esriGraphic,
-            esriSimpleFillSymbol, esriSimpleLineSymbol) {
+            esriSimpleFillSymbol, esriSimpleLineSymbol, esriPictureMarkerSymbol) {
 
             self.map = null;
             self.tourGraphicsLayer = null;
+            self.trackerGraphicsLayer = null;
             self.tourData = null;
             self.currentLocation = [];
 
@@ -24,16 +27,17 @@
                         center: [self.currentLocation.longitude, self.currentLocation.latitude]
                     });
 
-                    self.tourGraphicsLayer = new esriGraphicsLayer({
-                        opacity : 0.5
-                    });
+                    self.tourGraphicsLayer = new esriGraphicsLayer();
+                    self.trackerGraphicsLayer = new esriGraphicsLayer();
                     
                     self.map.addLayer(self.tourGraphicsLayer);
+                    self.map.addLayer(self.trackerGraphicsLayer);
 
                     self.map.on('load', function () {
                         self.loadTourData();
+                        self.drawCurrentLocation();
                         self.drawHotSpotsForTour();
-                        //self.checkGeoFences();
+                        self.checkGeoFences();
                     });
 
                 });
@@ -53,8 +57,18 @@
             self.locationChanged = function () {
                 var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
                 self.map.centerAt(currentLocationPt);
+                self.drawCurrentLocation();
                 self.checkGeoFences();
-            };            
+            };
+
+            self.drawCurrentLocation = function () {
+                var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
+                var starIcon = new esriPictureMarkerSymbol("img/star.png", 25, 25);
+                var starIconGraphic = new esriGraphic(currentLocationPt, starIcon);
+
+                self.trackerGraphicsLayer.clear();
+                self.trackerGraphicsLayer.add(starIconGraphic);
+            };
 
 
             //**************************************
@@ -74,13 +88,19 @@
             //Paint Tour's Hot Spots On Map
             self.drawHotSpotsForTour = function () {
                 _.each(self.tourData, function (tourEntry) {
-                    var symbol = new esriSimpleFillSymbol(esriSimpleFillSymbol.STYLE_SOLID,
-                        new esriSimpleLineSymbol(esriSimpleLineSymbol.STYLE_SOLID,
-                            new dojo.Color("#000"), 2), new dojo.Color("#fff")
-                    );
+                    if (debugMode) {
+                        var symbol = new esriSimpleFillSymbol(esriSimpleFillSymbol.STYLE_SOLID,
+                            new esriSimpleLineSymbol(esriSimpleLineSymbol.STYLE_SOLID,
+                                new dojo.Color("#000"), 2), new dojo.Color("#fff")
+                        );
 
-                    var graphic = new esriGraphic(tourEntry.geometry, symbol);
-                    self.tourGraphicsLayer.add(graphic);
+                        var graphic = new esriGraphic(tourEntry.geometry, symbol);
+                        self.tourGraphicsLayer.add(graphic);
+                    }
+
+                    var pushPin = new esriPictureMarkerSymbol("img/esri-pins/Beta_MapPin_BlueStar36.png", 19, 36);
+                    var pushPinGraphic = new esriGraphic(tourEntry.geometry.getCentroid(), pushPin);
+                    self.tourGraphicsLayer.add(pushPinGraphic);
                 });
             };
 
