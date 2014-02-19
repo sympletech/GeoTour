@@ -7,10 +7,12 @@
     //Esri JS Includes
     require(["esri/map", "esri/layers/GraphicsLayer", "esri/geometry/Point", "esri/geometry/Polygon", "esri/graphic",
             "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/PictureMarkerSymbol",
-            "esri/urlUtils", "esri/dijit/Directions", "esri/tasks/RouteParameters", "esri/geometry/webMercatorUtils"],
+            "esri/urlUtils", "esri/dijit/Directions", "esri/tasks/RouteParameters", "esri/geometry/webMercatorUtils",
+            "esri/symbols/TextSymbol", "esri/symbols/Font"],
         function (esriMap, esriGraphicsLayer, esriPoint, esriPolygon, esriGraphic,
             esriSimpleFillSymbol, esriSimpleLineSymbol, esriPictureMarkerSymbol,
-            esriurlUtils, esriDirections, esriRouteParameters, esriwebMercatorUtils) {
+            esriurlUtils, esriDirections, esriRouteParameters, esriwebMercatorUtils,
+            esriTextSymbol, esriFont) {
 
             self.map = null;
             self.tourGraphicsLayer = null;
@@ -107,7 +109,11 @@
                     map: self.map,
                     routeParams: rParams,
                     geocoderOptions: { autoNavigate: false },
-                    stops: [startCoords , finishCoords]
+                    stops: [startCoords, finishCoords],
+                    fromSymbol: null,
+                    stopSymbol: null,
+                    toSymbol:null
+                    
                 }, "directions-surface");
 
                 self.directionFinder.startup();
@@ -116,6 +122,12 @@
                     self.directionFinder.getDirections();
                     self.directionFinder.on('directions-finish', function () {
                         self.readRoute();
+                        //_.each($("#graphicsLayer1_layer").find('image'), function (graphicImage) {
+                        //    if ($(graphicImage).attr("data-esri-tourstop") != true) {
+                        //        $(graphicImage).hide();
+                        //    }
+                            
+                        //}); //.attr("data-esri-tourstop", "true");
                     });
                 }, 1000);
                 
@@ -170,7 +182,9 @@
 
                     var stopPoly = self.getTourEntryPolygon(tourStop);
 
+
                     if (debugMode) {
+                        //Draw Actual Geo-Fence Poly
                         var symbol = new esriSimpleFillSymbol(esriSimpleFillSymbol.STYLE_SOLID,
                             new esriSimpleLineSymbol(esriSimpleLineSymbol.STYLE_SOLID,
                                 new dojo.Color("#000"), 2), new dojo.Color("#fff")
@@ -179,11 +193,28 @@
                         var graphic = new esriGraphic(stopPoly, symbol);
                         self.tourGraphicsLayer.add(graphic);
                     }
+                    
+
 
                     var pushPin = new esriPictureMarkerSymbol("img/esri-pins/Beta_MapPin_BlueStar36.png", 19, 36);
-                    var pushPinGraphic = new esriGraphic(stopPoly.getCentroid(), pushPin);
+                    var pushPinCenter = stopPoly.getCentroid();
+                    pushPinCenter = pushPinCenter.offset(25, 150);
+                    var pushPinGraphic = new esriGraphic(pushPinCenter, pushPin);
+
                     self.tourGraphicsLayer.add(pushPinGraphic);
+                    
+                    var textSym = new esriTextSymbol(tourStop.name)
+                        .setAlign(esriTextSymbol.ALIGN_MIDDLE)
+                        .setFont(new esriFont("12pt").setWeight(esriFont.WEIGHT_BOLD));
+                    var textCenter = stopPoly.getCentroid();
+                    textCenter = textCenter.offset(0, -150);
+                    var textGraphic = new esriGraphic(textCenter, textSym);
+                    self.tourGraphicsLayer.add(textGraphic);
+                    
                 });
+
+                $("#graphicsLayer1_layer").find('image').attr("data-esri-tourstop", "true");
+                
             };
 
             self.getDirectionsToTourStop = function (tourStop) {
