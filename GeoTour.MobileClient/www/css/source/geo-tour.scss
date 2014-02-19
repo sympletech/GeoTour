@@ -9,7 +9,7 @@
 	right:0;
 }
 #directions-surface{
-	display : none;
+	//display : none;
 }
 
 .map-surface-wrapper{
@@ -59,7 +59,26 @@
 }
 
 
-
+#route-wrapper{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height:125px;
+	background: #2e7438;
+	z-index: 30;
+	color:#fff;
+	font-size:2em;
+	width:100%;
+	
+	.next-turn{
+		display:inline-block;
+	}
+	
+	.next-turn-description{
+		display:inline-block;
+	}
+}
 
 
 

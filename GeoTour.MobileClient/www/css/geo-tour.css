@@ -197,11 +197,6 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   right: 0;
 }
 
-/* line 11, source/geo-tour.scss */
-#directions-surface {
-  display: none;
-}
-
 /* line 15, source/geo-tour.scss */
 .map-surface-wrapper {
   z-index: 1;
@@ -247,23 +242,45 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   cursor: pointer;
 }
 
-/* line 67, source/geo-tour.scss */
+/* line 62, source/geo-tour.scss */
+#route-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 125px;
+  background: #2e7438;
+  z-index: 30;
+  color: #fff;
+  font-size: 2em;
+  width: 100%;
+}
+/* line 74, source/geo-tour.scss */
+#route-wrapper .next-turn {
+  display: inline-block;
+}
+/* line 78, source/geo-tour.scss */
+#route-wrapper .next-turn-description {
+  display: inline-block;
+}
+
+/* line 86, source/geo-tour.scss */
 #popup-wrapper {
   z-index: 10;
   display: none;
 }
-/* line 72, source/geo-tour.scss */
+/* line 91, source/geo-tour.scss */
 #popup-wrapper .overlay {
   background: #000;
   opacity: 0.75;
   width: 100%;
   height: 100%;
 }
-/* line 79, source/geo-tour.scss */
+/* line 98, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper {
   z-index: 12;
 }
-/* line 84, source/geo-tour.scss */
+/* line 103, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content {
   width: 75%;
   height: 70%;
@@ -273,7 +290,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   margin-top: 10%;
   border-radius: 5px;
 }
-/* line 93, source/geo-tour.scss */
+/* line 112, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content .popup-header {
   background: #2e7438;
   color: #fff;
@@ -282,40 +299,40 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   padding-bottom: 15px;
   border-radius: 5px 5px 0 0;
 }
-/* line 101, source/geo-tour.scss */
+/* line 120, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content .popup-header .close-popup {
   float: right;
   margin: -15px;
   cursor: pointer;
   font-size: 0.75em;
 }
-/* line 115, source/geo-tour.scss */
+/* line 134, source/geo-tour.scss */
 #popup-wrapper .media-player {
   display: none;
 }
 
-/* line 124, source/geo-tour.scss */
+/* line 143, source/geo-tour.scss */
 #view-tour-popup .tour-entry .thumbnail {
   width: 100px;
   height: 100px;
   float: left;
 }
-/* line 131, source/geo-tour.scss */
+/* line 150, source/geo-tour.scss */
 #view-tour-popup .tour-entry .tour-entry-detail img {
   padding: 5px;
 }
 
-/* line 139, source/geo-tour.scss */
+/* line 158, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 144, source/geo-tour.scss */
+/* line 163, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs li {
   float: left;
 }
-/* line 147, source/geo-tour.scss */
+/* line 166, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs li img {
   width: 125px;
   height: 125px;

@@ -17,6 +17,7 @@
             self.trackerGraphicsLayer = null;
             self.tourData = null;
             self.currentLocation = [];
+            self.directionFinder = null;
 
             self.init = function () {
                 esriurlUtils.addProxyRule({
@@ -47,7 +48,7 @@
                         self.drawHotSpotsForTour();
                         self.checkGeoFences();
 
-                        self.getDirections(self.tourData[0].geometry);
+                        self.getDirections(self.tourData[1].geometry);
                     });
 
                 });
@@ -69,6 +70,10 @@
                 self.map.centerAt(currentLocationPt);
                 self.drawCurrentLocation();
                 self.checkGeoFences();
+
+                var startCoords = currentLocationPt.x + "," + currentLocationPt.y;
+                self.directionFinder.updateStop(startCoords, 0);
+                self.directionFinder.getDirections();
             };
 
             self.drawCurrentLocation = function () {
@@ -80,6 +85,7 @@
                 self.trackerGraphicsLayer.add(starIconGraphic);
             };
 
+            
             self.getDirections = function (destination) {
                 var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
                 var destinationPt = esriwebMercatorUtils.webMercatorToGeographic(destination.getCentroid());
@@ -89,21 +95,31 @@
                 var startCoords = currentLocationPt.x + "," + currentLocationPt.y;
                 var finishCoords = destinationPt.x + "," + destinationPt.y;
                 
-                var directions = new esriDirections({
+                self.directionFinder = new esriDirections({
                     map: self.map,
                     routeParams: rParams,
+                    geocoderOptions: { autoNavigate: false },
                     stops: [startCoords , finishCoords]
                 }, "directions-surface");
 
-                directions.startup();
+                self.directionFinder.startup();
 
                 setTimeout(function () {
-                    $('.esriStopsGetDirections').focus().click();
-                    self.map.resize();
-                    self.map.reposition();
-
+                    self.directionFinder.getDirections();
+                    self.directionFinder.on('directions-finish', function () {
+                        self.readRoute();
+                    });
                 }, 1000);
                 
+
+            };
+            self.routeList = null;
+            
+            self.readRoute = function () {
+                //esriRoute
+                self.routeList = $('.esriRoute');
+
+                $("#route-wrapper").html(self.routeList[1].outerHTML);
 
             };
 

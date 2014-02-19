@@ -151,9 +151,6 @@ input[type=text], input[type=password], textarea {
   left: 0;
   right: 0; }
 
-#directions-surface {
-  display: none; }
-
 .map-surface-wrapper {
   z-index: 1; }
   .map-surface-wrapper #map-surface {
@@ -188,6 +185,22 @@ input[type=text], input[type=password], textarea {
       font-size: 1em;
       margin-top: 15px;
       cursor: pointer; }
+
+#route-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 125px;
+  background: #2e7438;
+  z-index: 30;
+  color: #fff;
+  font-size: 2em;
+  width: 100%; }
+  #route-wrapper .next-turn {
+    display: inline-block; }
+  #route-wrapper .next-turn-description {
+    display: inline-block; }
 
 #popup-wrapper {
   z-index: 10;
