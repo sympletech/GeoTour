@@ -151,6 +151,9 @@ input[type=text], input[type=password], textarea {
   left: 0;
   right: 0; }
 
+#directions-surface {
+  display: none; }
+
 .map-surface-wrapper {
   z-index: 1; }
   .map-surface-wrapper #map-surface {
@@ -186,21 +189,36 @@ input[type=text], input[type=password], textarea {
       margin-top: 15px;
       cursor: pointer; }
 
-#route-wrapper {
+#route-wrapper, #route-detail-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 125px;
-  background: #2e7438;
+  height: 80px;
+  background: #2e7438 !important;
   z-index: 30;
   color: #fff;
   font-size: 2em;
-  width: 100%; }
-  #route-wrapper .next-turn {
-    display: inline-block; }
-  #route-wrapper .next-turn-description {
-    display: inline-block; }
+  width: 100%;
+  padding-top: 15px; }
+  #route-wrapper .esriRouteInfo, #route-detail-wrapper .esriRouteInfo {
+    color: #fff; }
+    #route-wrapper .esriRouteInfo strong, #route-detail-wrapper .esriRouteInfo strong {
+      color: #fff; }
+    #route-wrapper .esriRouteInfo .esriRouteText strong:first-child, #route-detail-wrapper .esriRouteInfo .esriRouteText strong:first-child {
+      display: none; }
+  #route-wrapper .esriRouteZoom:focus, #route-detail-wrapper .esriRouteZoom:focus {
+    background: #2e7438 !important; }
+  #route-wrapper .esriRouteIcon, #route-detail-wrapper .esriRouteIcon {
+    background-size: cover;
+    width: 40px;
+    height: 40px; }
+  #route-wrapper tr:hover, #route-detail-wrapper tr:hover {
+    background: #2e7438; }
+
+#route-detail-wrapper {
+  top: 90px;
+  display: none; }
 
 #popup-wrapper {
   z-index: 10;

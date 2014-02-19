@@ -197,6 +197,11 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   right: 0;
 }
 
+/* line 11, source/geo-tour.scss */
+#directions-surface {
+  display: none;
+}
+
 /* line 15, source/geo-tour.scss */
 .map-surface-wrapper {
   z-index: 1;
@@ -243,44 +248,69 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
 }
 
 /* line 62, source/geo-tour.scss */
-#route-wrapper {
+#route-wrapper, #route-detail-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 125px;
-  background: #2e7438;
+  height: 80px;
+  background: #2e7438 !important;
   z-index: 30;
   color: #fff;
   font-size: 2em;
   width: 100%;
+  padding-top: 15px;
 }
-/* line 74, source/geo-tour.scss */
-#route-wrapper .next-turn {
-  display: inline-block;
+/* line 75, source/geo-tour.scss */
+#route-wrapper .esriRouteInfo, #route-detail-wrapper .esriRouteInfo {
+  color: #fff;
 }
 /* line 78, source/geo-tour.scss */
-#route-wrapper .next-turn-description {
-  display: inline-block;
+#route-wrapper .esriRouteInfo strong, #route-detail-wrapper .esriRouteInfo strong {
+  color: #fff;
+}
+/* line 83, source/geo-tour.scss */
+#route-wrapper .esriRouteInfo .esriRouteText strong:first-child, #route-detail-wrapper .esriRouteInfo .esriRouteText strong:first-child {
+  display: none;
+}
+/* line 90, source/geo-tour.scss */
+#route-wrapper .esriRouteZoom:focus, #route-detail-wrapper .esriRouteZoom:focus {
+  background: #2e7438 !important;
+}
+/* line 94, source/geo-tour.scss */
+#route-wrapper .esriRouteIcon, #route-detail-wrapper .esriRouteIcon {
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+}
+/* line 100, source/geo-tour.scss */
+#route-wrapper tr:hover, #route-detail-wrapper tr:hover {
+  background: #2e7438;
 }
 
-/* line 86, source/geo-tour.scss */
+/* line 105, source/geo-tour.scss */
+#route-detail-wrapper {
+  top: 90px;
+  display: none;
+}
+
+/* line 113, source/geo-tour.scss */
 #popup-wrapper {
   z-index: 10;
   display: none;
 }
-/* line 91, source/geo-tour.scss */
+/* line 118, source/geo-tour.scss */
 #popup-wrapper .overlay {
   background: #000;
   opacity: 0.75;
   width: 100%;
   height: 100%;
 }
-/* line 98, source/geo-tour.scss */
+/* line 125, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper {
   z-index: 12;
 }
-/* line 103, source/geo-tour.scss */
+/* line 130, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content {
   width: 75%;
   height: 70%;
@@ -290,7 +320,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   margin-top: 10%;
   border-radius: 5px;
 }
-/* line 112, source/geo-tour.scss */
+/* line 139, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content .popup-header {
   background: #2e7438;
   color: #fff;
@@ -299,40 +329,40 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   padding-bottom: 15px;
   border-radius: 5px 5px 0 0;
 }
-/* line 120, source/geo-tour.scss */
+/* line 147, source/geo-tour.scss */
 #popup-wrapper .popup-content-wrapper .popup-content .popup-header .close-popup {
   float: right;
   margin: -15px;
   cursor: pointer;
   font-size: 0.75em;
 }
-/* line 134, source/geo-tour.scss */
+/* line 161, source/geo-tour.scss */
 #popup-wrapper .media-player {
   display: none;
 }
 
-/* line 143, source/geo-tour.scss */
+/* line 170, source/geo-tour.scss */
 #view-tour-popup .tour-entry .thumbnail {
   width: 100px;
   height: 100px;
   float: left;
 }
-/* line 150, source/geo-tour.scss */
+/* line 177, source/geo-tour.scss */
 #view-tour-popup .tour-entry .tour-entry-detail img {
   padding: 5px;
 }
 
-/* line 158, source/geo-tour.scss */
+/* line 185, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 163, source/geo-tour.scss */
+/* line 190, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs li {
   float: left;
 }
-/* line 166, source/geo-tour.scss */
+/* line 193, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs li img {
   width: 125px;
   height: 125px;

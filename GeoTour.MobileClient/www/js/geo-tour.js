@@ -116,11 +116,15 @@
             self.routeList = null;
             
             self.readRoute = function () {
-                //esriRoute
                 self.routeList = $('.esriRoute');
 
                 $("#route-wrapper").html(self.routeList[1].outerHTML);
 
+                var routeDetails = "";
+                for (var i = 2; i < self.routeList.length; i++) {
+                    routeDetails += self.routeList[i].outerHTML;
+                }
+                $("#route-detail-wrapper").html(routeDetails);
             };
 
 
@@ -222,13 +226,26 @@
                     self.hidePopup();
                 });
 
+                $("#route-wrapper").on("click", function () {
+                    var $routeDetails = $("#route-detail-wrapper");
+                    if ($routeDetails.is(':visible')) {
+                        $routeDetails.fadeOut();
+                    } else {
+                        $routeDetails.fadeIn();
+                    }
+                });
+
             };
 
             //Call Init
             document.addEventListener('deviceready', function () {
+
+            }, false);
+            $(function() {
                 self.init();
                 self.registerMenuButtons();
-            }, false);
+            });
+
         });
 
 })();
