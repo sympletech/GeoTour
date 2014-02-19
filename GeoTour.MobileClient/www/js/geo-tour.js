@@ -118,13 +118,16 @@
             self.readRoute = function () {
                 self.routeList = $('.esriRoute');
 
-                $("#route-wrapper").html(self.routeList[1].outerHTML);
+                //$("#route-wrapper").html(self.routeList[1].outerHTML);
 
                 var routeDetails = "";
-                for (var i = 2; i < self.routeList.length; i++) {
+                for (var i = 1; i < self.routeList.length; i++) {
                     routeDetails += self.routeList[i].outerHTML;
                 }
-                $("#route-detail-wrapper").html(routeDetails);
+                $("#route-wrapper").html(routeDetails);
+                $("#route-wrapper").find('tr').hide();
+                $("#route-wrapper").find('tr').first().show();
+
             };
 
 
@@ -227,11 +230,11 @@
                 });
 
                 $("#route-wrapper").on("click", function () {
-                    var $routeDetails = $("#route-detail-wrapper");
-                    if ($routeDetails.is(':visible')) {
-                        $routeDetails.fadeOut();
+                    if ($("#route-wrapper").find('tr').last().is(':visible')) {
+                        $("#route-wrapper").find('tr').hide();
+                        $("#route-wrapper").find('tr').first().show();
                     } else {
-                        $routeDetails.fadeIn();
+                        $("#route-wrapper").find('tr').show();
                     }
                 });
 
