@@ -338,6 +338,10 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   cursor: pointer;
   font-size: 0.75em;
 }
+/* line 161, source/geo-tour.scss */
+#popup-wrapper .popup-content-wrapper .content-wrapper {
+  display: block;
+}
 /* line 166, source/geo-tour.scss */
 #popup-wrapper .media-player {
   display: none;
@@ -362,11 +366,11 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
 }
 /* line 195, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs li {
-  float: left;
+  display: inline-block;
 }
 /* line 198, source/geo-tour.scss */
 #tour-stop-popup .content-thumbs li img {
-  width: 125px;
-  height: 125px;
+  width: 100px;
+  height: 100px;
   margin: 10px;
 }

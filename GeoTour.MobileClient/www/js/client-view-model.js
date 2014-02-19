@@ -48,15 +48,14 @@
     self.findTourPopup = {
         search: ko.observable(""),
         results: ko.observableArray([
-            "Big Bear (1.5 Miles)",
-            "Big Bear (1.5 Miles)"
+            "Big Bear North Shore Tour (1.5 Miles)"
         ])
     };
 
     self.stopDetails = ko.observable({
         name: 'Solar Observatority',
-        photos: ['http://www.bbso.njit.edu/Images/tour2.jpg', 'http://www.bbso.njit.edu/Images/tour2.jpg'],
-        videos: ['http://www.bbso.njit.edu/Images/tour2.jpg', 'http://www.bbso.njit.edu/Images/tour2.jpg']
+        photos: ['https://i1.ytimg.com/vi/bTUmVM99qow/mqdefault.jpg', 'https://i1.ytimg.com/vi/o3gxOlnzx0I/mqdefault.jpg', 'https://i1.ytimg.com/vi/-9ngOxYFslI/mqdefault.jpg', 'https://i1.ytimg.com/vi/HQdKjwy1gJc/mqdefault.jpg'],
+        videos: []
     });
 
 

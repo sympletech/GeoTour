@@ -156,10 +156,10 @@
 					font-size:0.75em;
 				}
 			}
+		}
 
-			.popup-body{
-
-			}
+		.content-wrapper{
+			display:block;
 		}
 	}
 
@@ -193,11 +193,11 @@
 		padding:0;
 
 		li{
-			float:left;
+			display:inline-block;
 
 			img{
-				width:125px;
-				height:125px;
+				width:100px;
+				height:100px;
 				margin:10px;
 			}
 		}
