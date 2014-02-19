@@ -151,6 +151,9 @@ input[type=text], input[type=password], textarea {
   left: 0;
   right: 0; }
 
+#directions-surface {
+  display: none; }
+
 .map-surface-wrapper {
   z-index: 1; }
   .map-surface-wrapper #map-surface {

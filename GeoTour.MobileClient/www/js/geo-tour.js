@@ -1,13 +1,16 @@
 ﻿var geoTour = new (function () {
     var self = this;
-
+    self.proxyUrl = "http://webappsproxydev.esri.com/OAuth";
+    
     var debugMode = true;
 
     //Esri JS Includes
     require(["esri/map", "esri/layers/GraphicsLayer", "esri/geometry/Point", "esri/geometry/Polygon", "esri/graphic",
-            "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/PictureMarkerSymbol"],
+            "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/PictureMarkerSymbol",
+            "esri/urlUtils", "esri/dijit/Directions", "esri/tasks/RouteParameters", "esri/geometry/webMercatorUtils"],
         function (esriMap, esriGraphicsLayer, esriPoint, esriPolygon, esriGraphic,
-            esriSimpleFillSymbol, esriSimpleLineSymbol, esriPictureMarkerSymbol) {
+            esriSimpleFillSymbol, esriSimpleLineSymbol, esriPictureMarkerSymbol,
+            esriurlUtils, esriDirections, esriRouteParameters, esriwebMercatorUtils) {
 
             self.map = null;
             self.tourGraphicsLayer = null;
@@ -16,6 +19,11 @@
             self.currentLocation = [];
 
             self.init = function () {
+                esriurlUtils.addProxyRule({
+                    urlPrefix: "route.arcgis.com",
+                    proxyUrl: 'http://webappsproxydev.esri.com/OAuth'
+                });                
+
                 navigator.geolocation.getCurrentPosition(function (position) {
 
                     self.currentLocation = position.coords;
@@ -38,6 +46,8 @@
                         self.drawCurrentLocation();
                         self.drawHotSpotsForTour();
                         self.checkGeoFences();
+
+                        self.getDirections(self.tourData[0].geometry);
                     });
 
                 });
@@ -70,13 +80,40 @@
                 self.trackerGraphicsLayer.add(starIconGraphic);
             };
 
+            self.getDirections = function (destination) {
+                var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
+                var destinationPt = esriwebMercatorUtils.webMercatorToGeographic(destination.getCentroid());
+                
+                var rParams = new esriRouteParameters();
+                rParams.directionsLengthUnits = esri.Units.MILES;
+                var startCoords = currentLocationPt.x + "," + currentLocationPt.y;
+                var finishCoords = destinationPt.x + "," + destinationPt.y;
+                
+                var directions = new esriDirections({
+                    map: self.map,
+                    routeParams: rParams,
+                    stops: [startCoords , finishCoords]
+                }, "directions-surface");
+
+                directions.startup();
+
+                setTimeout(function () {
+                    $('.esriStopsGetDirections').focus().click();
+                    self.map.resize();
+                    self.map.reposition();
+
+                }, 1000);
+                
+
+            };
+
 
             //**************************************
             // Tour Data
             //**************************************
             self.loadTourData = function () {
                 self.tourData = _.map(fakeTour.steps, function (dataEntry) {
-                    var polyDef = JSON.parse(dataEntry.geomentryJson);
+                    var polyDef = JSON.parse(dataEntry.geometryJson);
 
                     var ploygon = new esriPolygon(polyDef.spatialReference);
                     ploygon.rings = polyDef.rings;

@@ -8,6 +8,9 @@
 	left:0;
 	right:0;
 }
+#directions-surface{
+	display : none;
+}
 
 .map-surface-wrapper{
 	@extend .abs-fill;
