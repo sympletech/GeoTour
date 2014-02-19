@@ -19,7 +19,7 @@
             self.currentLocation = [];
             self.directionFinder = null;
 
-            self.init = function () {
+            self.init = function (tourData) {
                 esriurlUtils.addProxyRule({
                     urlPrefix: "route.arcgis.com",
                     proxyUrl: 'http://webappsproxydev.esri.com/OAuth'
@@ -43,10 +43,10 @@
                     self.map.addLayer(self.trackerGraphicsLayer);
 
                     self.map.on('load', function () {
-                        self.loadTourData();
+                        //self.loadTourData();
                         self.drawCurrentLocation();
-                        self.drawHotSpotsForTour();
-                        self.checkGeoFences();
+
+                        self.loadTour(tourData);
 
                         //self.getDirections(self.tourData[1].geometry);
                         self.registerMenuButtons();
@@ -61,6 +61,11 @@
                         self.locationChanged();
                     }
                 });
+            };
+
+            self.loadTour = function (tourData) {
+                self.drawHotSpotsForTour(tourData.tourStops);
+                self.checkGeoFences(tourData.tourStops);
             };
 
             //**************************************
@@ -130,6 +135,13 @@
                 $("#route-wrapper").show();
             };
 
+            self.getTourEntryPolygon = function (tourStop) {
+                var polyDef = JSON.parse(tourStop.geometryJson);
+                var ploygon = new esriPolygon(polyDef.spatialReference);
+                ploygon.rings = polyDef.rings;
+                return ploygon;
+            };
+
 
             //**************************************
             // Tour Data
@@ -146,31 +158,41 @@
             };
 
             //Paint Tour's Hot Spots On Map
-            self.drawHotSpotsForTour = function () {
-                _.each(self.tourData, function (tourEntry) {
+            self.drawHotSpotsForTour = function (tourStops) {
+                _.each(tourStops, function (tourStop) {
+
+                    var stopPoly = self.getTourEntryPolygon(tourStop);
+
                     if (debugMode) {
                         var symbol = new esriSimpleFillSymbol(esriSimpleFillSymbol.STYLE_SOLID,
                             new esriSimpleLineSymbol(esriSimpleLineSymbol.STYLE_SOLID,
                                 new dojo.Color("#000"), 2), new dojo.Color("#fff")
                         );
 
-                        var graphic = new esriGraphic(tourEntry.geometry, symbol);
+                        var graphic = new esriGraphic(stopPoly, symbol);
                         self.tourGraphicsLayer.add(graphic);
                     }
 
                     var pushPin = new esriPictureMarkerSymbol("img/esri-pins/Beta_MapPin_BlueStar36.png", 19, 36);
-                    var pushPinGraphic = new esriGraphic(tourEntry.geometry.getCentroid(), pushPin);
+                    var pushPinGraphic = new esriGraphic(stopPoly.getCentroid(), pushPin);
                     self.tourGraphicsLayer.add(pushPinGraphic);
                 });
             };
 
+            self.getDirectionsToTourStop = function (tourStop) {
+                var stopPoly = self.getTourEntryPolygon(tourStop);
+                self.getDirections(stopPoly);
+            };
+
             //Check if current location is inside a geo fence of the tour
-            self.checkGeoFences = function () {
+            self.checkGeoFences = function (tourStops) {
                 var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
-                _.each(self.tourData, function (tourEntry) {
-                    if (tourEntry.geometry.contains(currentLocationPt)) {
-                        if (tourEntry.onGeoTrigger.played == null) {
-                            self.playTourGeoFenceContent(tourEntry);
+                _.each(tourStops, function (tourStop) {
+                    var stopPoly = self.getTourEntryPolygon(tourStop);
+                    if (stopPoly.contains(currentLocationPt)) {
+                        if (tourStop.onGeoTrigger.played == null) {
+                            self.playTourGeoFenceContent(tourStop);
+                            tourStop.onGeoTrigger.played = true;
                         }
                     }
                 });

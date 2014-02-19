@@ -8,20 +8,9 @@
         return self.currentTour().tourStops;
     });
     
-    self.loadTour = function (tour) {
-        var currentTour = fakeTour;
-        self.currentTour(currentTour);
-
-        self.showWelcomeScreen(false);
-        self.showMapScreen(true);
-        geoTour.init();
-
-        geoTour.showPopup('view-tour-popup');
-    };
-    
-
-
-
+    //************************************
+    //  Menu
+    //************************************
     self.menu = {
         findTourClick: function () {
             geoTour.showPopup('find-tour-popup');
@@ -33,6 +22,28 @@
             geoTour.showPopup('tour-stop-popup');
         },
     };
+
+    //************************************
+    //  Tour Data
+    //************************************
+    self.loadTour = function (tour) {
+        var currentTour = fakeTour;
+        self.currentTour(currentTour);
+
+        self.showWelcomeScreen(false);
+        self.showMapScreen(true);
+        geoTour.init(self.currentTour());
+
+        geoTour.showPopup('view-tour-popup');
+    };
+
+    self.currentDestination = ko.observable({});
+    self.setDestination = function (tourStop) {
+        self.currentDestination(tourStop);
+        geoTour.getDirectionsToTourStop(tourStop);
+        geoTour.hidePopup();
+    };
+
 
     self.findTourPopup = {
         search: ko.observable(""),
