@@ -118,8 +118,6 @@
             self.readRoute = function () {
                 self.routeList = $('.esriRoute');
 
-                //$("#route-wrapper").html(self.routeList[1].outerHTML);
-
                 var routeDetails = "";
                 for (var i = 1; i < self.routeList.length; i++) {
                     routeDetails += self.routeList[i].outerHTML;
@@ -128,6 +126,7 @@
                 $("#route-wrapper").find('tr').hide();
                 $("#route-wrapper").find('tr').first().show();
 
+                $("#route-wrapper").show();
             };
 
 

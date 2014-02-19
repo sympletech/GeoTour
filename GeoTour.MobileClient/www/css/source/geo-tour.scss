@@ -41,7 +41,7 @@
 		z-index: 2;
 		background: #fff;
 		width: 100%;
-		height: 100px;
+		height: 0;
 		bottom: 0;
 		padding-left: 10px;	
 
@@ -59,7 +59,7 @@
 }
 
 
-#route-wrapper, #route-detail-wrapper{
+#route-wrapper{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -71,6 +71,7 @@
 	font-size: 2em;
 	width: 100%;
 	padding-top: 15px;
+	display:none;
 	
 	.esriRouteInfo{
 		color: #fff;
@@ -100,11 +101,6 @@
 	tr:hover{
 		background: #2e7438;
 	}
-}
-
-#route-detail-wrapper{
-	top:90px;
-	display:none;
 }
 
 
