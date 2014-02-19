@@ -2,7 +2,7 @@
     var self = this;
     self.proxyUrl = "http://webappsproxydev.esri.com/OAuth";
     
-    var debugMode = true;
+    var debugMode = false;
 
     //Esri JS Includes
     require(["esri/map", "esri/layers/GraphicsLayer", "esri/geometry/Point", "esri/geometry/Polygon", "esri/graphic",
@@ -104,7 +104,13 @@
                 rParams.directionsLengthUnits = esri.Units.MILES;
                 var startCoords = currentLocationPt.x + "," + currentLocationPt.y;
                 var finishCoords = destinationPt.x + "," + destinationPt.y;
-                
+
+                if (self.directionFinder != null) {
+                    self.directionFinder.clearDirections();
+                    self.directionFinder.destroy();
+                    self.directionFinder = null;
+                }
+
                 self.directionFinder = new esriDirections({
                     map: self.map,
                     routeParams: rParams,
@@ -122,12 +128,6 @@
                     self.directionFinder.getDirections();
                     self.directionFinder.on('directions-finish', function () {
                         self.readRoute();
-                        //_.each($("#graphicsLayer1_layer").find('image'), function (graphicImage) {
-                        //    if ($(graphicImage).attr("data-esri-tourstop") != true) {
-                        //        $(graphicImage).hide();
-                        //    }
-                            
-                        //}); //.attr("data-esri-tourstop", "true");
                     });
                 }, 1000);
                 
