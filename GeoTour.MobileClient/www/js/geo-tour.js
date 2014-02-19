@@ -17,6 +17,7 @@
             self.trackerGraphicsLayer = null;
             self.tourData = null;
             self.currentLocation = [];
+            self.currentDestination = null;
             self.directionFinder = null;
 
             self.init = function (tourData) {
@@ -64,6 +65,7 @@
             };
 
             self.loadTour = function (tourData) {
+                self.tourData = tourData;
                 self.drawHotSpotsForTour(tourData.tourStops);
                 self.checkGeoFences(tourData.tourStops);
             };
@@ -75,7 +77,7 @@
                 var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
                 self.map.centerAt(currentLocationPt);
                 self.drawCurrentLocation();
-                self.checkGeoFences();
+                self.checkGeoFences(self.tourData.tourStops);
 
                 var startCoords = currentLocationPt.x + "," + currentLocationPt.y;
                 self.directionFinder.updateStop(startCoords, 0);
@@ -119,6 +121,11 @@
                 
 
             };
+
+            self.clearNavigation = function () {
+                self.directionFinder.clearDirections();
+            };
+
             self.routeList = null;
             
             self.readRoute = function () {
@@ -180,6 +187,7 @@
             };
 
             self.getDirectionsToTourStop = function (tourStop) {
+                self.currentDestination = tourStop;
                 var stopPoly = self.getTourEntryPolygon(tourStop);
                 self.getDirections(stopPoly);
             };
@@ -187,12 +195,19 @@
             //Check if current location is inside a geo fence of the tour
             self.checkGeoFences = function (tourStops) {
                 var currentLocationPt = new esriPoint(self.currentLocation.longitude, self.currentLocation.latitude);
+
                 _.each(tourStops, function (tourStop) {
                     var stopPoly = self.getTourEntryPolygon(tourStop);
                     if (stopPoly.contains(currentLocationPt)) {
+                        
                         if (tourStop.onGeoTrigger.played == null) {
                             self.playTourGeoFenceContent(tourStop);
                             tourStop.onGeoTrigger.played = true;
+                            tourStop.visited = true;
+
+                            if (self.currentDestination == tourStop) {
+                                self.clearNavigation();
+                            }
                         }
                     }
                 });
