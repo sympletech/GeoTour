@@ -12,123 +12,127 @@
 
     <title>WebOps Geo Tour</title>
 </head>
-<body>
-
-    <div class="map-surface-wrapper">
+    <body>
         
-        <div id="map-surface"></div>
-
-        <div id="directions-surface"></div>
+        <!--Welcome Screen-->
+        <div class="welcome-screen" data-bind="visible:showWelcomeScreen, click:loadTour"></div>
         
-        <table id="route-wrapper" class="simpleDirections"></table>
-        
-        <!--Menu-->
-        <button id="menu-button">Menu</button>
-        <div id="menu">
-            <button id="find-tour" data-bind="click:menu.findTourClick">Find Tour</button>
-            <button id="view-tour-stops" data-bind="click:menu.TourStopsClick, visible:showTourStopsButton">Tour Stops</button>
-            <button id="view-tour-onmap" data-bind="click:menu.ViewTourClick, visible:showViewTourOnMapButton">View Tour on Map</button>
-        </div>
+        <!--Map Container-->
+        <div class="map-surface-wrapper" data-bind="visible:showMapScreen">
 
-    </div>
+            <div id="map-surface"></div>
 
-    <div id="popup-wrapper">
-        <div class="overlay"></div>
-        
-        <!--Find Tour Popup-->
-        <div id="find-tour-popup" class="popup-content-wrapper">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <button class="close-popup">X</button>
-                    Find a Tour
-                    <input type="text" data-bind="value: findTourPopup.search" />
-                </div>
-                <div class="popup-body">
-                    <ul class="list" data-bind="foreach : findTourPopup.results">
-                        <li class="hover" data-bind="html:$data"></li>
-                    </ul>
-                </div>                
+            <div id="directions-surface"></div>
+
+            <table id="route-wrapper" class="simpleDirections"></table>
+
+            <!--Menu-->
+            <button id="menu-button">Menu</button>
+            <div id="menu">
+                <button id="find-tour" data-bind="click:menu.findTourClick">Find Tour</button>
+                <button id="view-tour-stops" data-bind="click:menu.TourStopsClick">Tour Stops</button>
+                <button id="view-tour-onmap" data-bind="click:menu.ViewTourClick">View Tour on Map</button>
             </div>
+
         </div>
+
+        <div id="popup-wrapper">
+            <div class="overlay"></div>
         
-        <!--View Tour Popup-->
-        <div id="view-tour-popup" class="popup-content-wrapper">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <button class="close-popup">X</button>
-                    <div data-bind="html:currentTour().name"></div>
-                    Tour Stops
-                </div>
-                <div class="popup-body" >
-                    <ul class="list" data-bind="foreach:currentTour().tourStops">
-                        <li class="hover tour-entry">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <img class="thumbnail" data-bind="attr : {src : thumbnail}" />
-                                    </td>
-                                    <td class="tour-entry-detail">
-                                        <b data-bind="html : name"></b><br />
-                                        <img src="img/navigation-pointer.png" />
-                                        <b>1.5 Miles</b>
-                                    </td>
-                                </tr>
-                            </table>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        
-        <!--Stop Details Popup-->
-        <div id="tour-stop-popup" class="popup-content-wrapper">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <button class="close-popup">X</button>
-                    <div data-bind="html:currentTour().name"></div>
-                    <div data-bind="html:stopDetails().name"></div>
-                </div>
-                <div class="popup-body">
-                    <div class="player-wrapper">
-                        <audio id="audio-player" class="media-player" controls></audio>
-                        <iframe id="youtube-player" class="media-player" width="640" height="390" frameborder="0" allowfullscreen></iframe>
+            <!--Find Tour Popup-->
+            <div id="find-tour-popup" class="popup-content-wrapper">
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <button class="close-popup">X</button>
+                        Find a Tour
+                        <input type="text" data-bind="value: findTourPopup.search" />
                     </div>
+                    <div class="popup-body">
+                        <ul class="list" data-bind="foreach : findTourPopup.results">
+                            <li class="hover" data-bind="html:$data"></li>
+                        </ul>
+                    </div>                
+                </div>
+            </div>
+        
+            <!--View Tour Popup-->
+            <div id="view-tour-popup" class="popup-content-wrapper">
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <button class="close-popup">X</button>
+                        <div data-bind="html:currentTour().name"></div>
+                        Tour Stops
+                    </div>
+                    <div class="popup-body" >
+                        <ul class="list" data-bind="foreach:currentTourStops">
+                            <li class="hover tour-entry">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img class="thumbnail" data-bind="attr : {src : thumbnail}" />
+                                        </td>
+                                        <td class="tour-entry-detail">
+                                            <b data-bind="html : name"></b><br />
+                                            <img src="img/navigation-pointer.png" />
+                                            <b>1.5 Miles</b>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+        
+            <!--Stop Details Popup-->
+            <div id="tour-stop-popup" class="popup-content-wrapper">
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <button class="close-popup">X</button>
+                        <div data-bind="html:currentTour().name"></div>
+                        <div data-bind="html:stopDetails().name"></div>
+                    </div>
+                    <div class="popup-body">
+                        <div class="player-wrapper">
+                            <audio id="audio-player" class="media-player" controls></audio>
+                            <iframe id="youtube-player" class="media-player" width="640" height="390" frameborder="0" allowfullscreen></iframe>
+                        </div>
 
-                    <ul class="content-thumbs" data-bind="foreach:stopDetails().photos">
-                        <li class="hover"><img class="thumbnail" data-bind="attr : { src : $data }" /></li>
-                    </ul>
+                        <ul class="content-thumbs" data-bind="foreach:stopDetails().photos">
+                            <li class="hover"><img class="thumbnail" data-bind="attr : { src : $data }" /></li>
+                        </ul>
                     
-                    <ul class="content-thumbs" data-bind="foreach:stopDetails().videos">
-                        <li class="hover"><img class="thumbnail" data-bind="attr : { src : $data }" /></li>
-                    </ul>
+                        <ul class="content-thumbs" data-bind="foreach:stopDetails().videos">
+                            <li class="hover"><img class="thumbnail" data-bind="attr : { src : $data }" /></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <!--vendor scripts-->
-    <script src="phonegap.js"></script>
-    <script src="js/vendor/jquery-1.11.0.min.js"></script>
-    <script src="js/vendor/underscore-min.js"></script>
-    <script src="js/vendor/knockout-3.0.0.js"></script>
-    <script src="js/vendor/greensock/TweenMax.min.js"></script>
+        <!--vendor scripts-->
+        <script src="phonegap.js"></script>
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="js/vendor/underscore-min.js"></script>
+        <script src="js/vendor/knockout-3.0.0.js"></script>
+        <script src="js/vendor/greensock/TweenMax.min.js"></script>
 
-    <!--ESRI Mapping API-->
-    <script>var dojoConfig = { parseOnLoad: true };</script>
-    <script src="http://js.arcgis.com/3.7/"></script>
+        <!--ESRI Mapping API-->
+        <script>var dojoConfig = { parseOnLoad: true };</script>
+        <script src="http://js.arcgis.com/3.7/"></script>
 
-    <!--Application Scripts-->
-    <script src="js/fake-data.js"></script>
-    <script src="js/geo-tour.js"></script>
-    <script src="js/client-view-model.js"></script>
+        <!--Application Scripts-->
+        <script src="js/fake-data.js"></script>
+        <script src="js/geo-tour.js"></script>
+        <script src="js/client-view-model.js"></script>
     
-    <script type="text/javascript">
-        ko.applyBindings(new clientViewModel());
-    </script>
+        <script type="text/javascript">
+            ko.applyBindings(new clientViewModel());
+        </script>
 
-</body>
+    </body>
 
 </html>

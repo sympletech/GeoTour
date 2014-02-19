@@ -8,6 +8,15 @@
 	left:0;
 	right:0;
 }
+
+.welcome-screen{
+	@extend .abs-fill;
+	background:url('../img/home-fake.png');
+	background-size:cover;
+	cursor:pointer;
+}
+
+
 #directions-surface{
 	display : none;
 }

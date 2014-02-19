@@ -1,24 +1,26 @@
 ﻿var clientViewModel = function () {
     var self = this;
 
-    self.currentTour = ko.observable({
-        name: 'Big Bear Lake California',
-        tourStops: [
-            {
-                id: 1,
-                name: 'Fawnskin',
-                thumbnail: 'http://www.bbso.njit.edu/Images/tour2.jpg'
-            },
-            {
-                id: 2,
-                name: 'Observatority',
-                thumbnail: 'http://www.bbso.njit.edu/Images/tour2.jpg'
-            }
-        ]
+    self.showWelcomeScreen = ko.observable(true);
+    self.showMapScreen = ko.observable(false);
+    self.currentTour = ko.observable({});
+    self.currentTourStops = ko.computed(function () {
+        return self.currentTour().tourStops;
     });
+    
+    self.loadTour = function (tour) {
+        var currentTour = fakeTour;
+        self.currentTour(currentTour);
 
-    self.showTourStopsButton = ko.observable(true);
-    self.showViewTourOnMapButton = ko.observable(true);
+        self.showWelcomeScreen(false);
+        self.showMapScreen(true);
+        geoTour.init();
+
+        geoTour.showPopup('view-tour-popup');
+    };
+    
+
+
 
     self.menu = {
         findTourClick: function () {
@@ -33,7 +35,7 @@
     };
 
     self.findTourPopup = {
-        search: ko.observable("Hello"),
+        search: ko.observable(""),
         results: ko.observableArray([
             "Big Bear (1.5 Miles)",
             "Big Bear (1.5 Miles)"

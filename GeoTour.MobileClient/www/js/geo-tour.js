@@ -48,7 +48,8 @@
                         self.drawHotSpotsForTour();
                         self.checkGeoFences();
 
-                        self.getDirections(self.tourData[1].geometry);
+                        //self.getDirections(self.tourData[1].geometry);
+                        self.registerMenuButtons();
                     });
 
                 });
@@ -241,12 +242,8 @@
 
             //Call Init
             document.addEventListener('deviceready', function () {
-
+                //self.init();
             }, false);
-            $(function() {
-                self.init();
-                self.registerMenuButtons();
-            });
 
         });
 

@@ -144,12 +144,17 @@ input[type=text], input[type=password], textarea {
       background: #3cab4c;
       color: #fff; }
 
-.abs-fill, .map-surface-wrapper, #popup-wrapper, #popup-wrapper .popup-content-wrapper {
+.abs-fill, .welcome-screen, .map-surface-wrapper, #popup-wrapper, #popup-wrapper .popup-content-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0; }
+
+.welcome-screen {
+  background: url("../img/home-fake.png");
+  background-size: cover;
+  cursor: pointer; }
 
 #directions-surface {
   display: none; }
